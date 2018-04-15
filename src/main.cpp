@@ -1,10 +1,13 @@
 #include <iostream>
 #include <cstdlib>
+//#include "functions.h"
 #include "Socket.h"
 #include "EventLoop.h"
 #include "EventLoopThread.h"
 #include "EventLoopThreadPool.h"
 
+
+using namespace std;
 
 int main(int argc, char **argv)
 {
@@ -15,6 +18,9 @@ int main(int argc, char **argv)
     }
     int port = std::atoi(argv[1]);
 
+    system("xdg-open http://localhost:5000");
+ 
+    
     
     int listenFd = Socket::createSocket();
     Socket::setReuseAddr(listenFd, true);

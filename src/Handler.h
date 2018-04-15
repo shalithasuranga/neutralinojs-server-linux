@@ -30,9 +30,7 @@ public:
 private:
     bool receiveRequest();  // 接受客户的请求并解析
     void sendResponse();    // 发送相应
-    void sendErrorMsg(const std::string &errorNum,
-                      const std::string &shortMsg,
-                      const std::string &longMsg);
+    void sendErrorMsg();
     void parseURI();
     void getFileType();
     int _connfd;
