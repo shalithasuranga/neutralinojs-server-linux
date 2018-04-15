@@ -4,6 +4,7 @@
  */
 
 #include "Handler.h"
+#include "router.h"
 
 using namespace std;
 
@@ -27,8 +28,9 @@ void Handler::handle()
         _isClosed = true;
         return;
     }
-    string content =  "hey fuck";
-    std::string msg = "HTTP/1.1 200 OK\r\nContent-Length: " + std::to_string(content.size()) +"\r\nConnection: close\r\n\r\n" + content;
+    pair<string, string> resp = routes::handle(_request.uri);
+    string content =  resp.first;
+    std::string msg = "HTTP/1.1 200 OK\r\nContent-Type:" + resp.second + "\r\nContent-Length: " + std::to_string(content.size()) +"\r\nConnection: close\r\n\r\n" + content;
     _outputBuffer.append(msg.c_str(), msg.size());
     _outputBuffer.sendFd(_connfd);
     close(_connfd);
@@ -50,11 +52,7 @@ bool Handler::receiveRequest()
 
 void Handler::sendErrorMsg()
 {
-    std::string msg = "HTTP/1.1 200 OK\r\nContent-Length: 13\r\nConnection: close\r\n\r\nHello, world!";
-    _outputBuffer.append(msg.c_str(), msg.size());
-    _outputBuffer.sendFd(_connfd);
-    close(_connfd);
-    _isClosed = true;
+
 }
 
 void Handler::parseURI()

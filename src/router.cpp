@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <unistd.h>
 #include "functions.h"
 
 using namespace std;
@@ -27,7 +28,10 @@ namespace routes {
 
     pair<string, string> handle(string path) {
         if(path == "/"){
-            return make_pair(routes::getFile("app\\index.html"), "text/html");
+            char cwd[1024];
+            getcwd(cwd, sizeof(cwd));
+            cout << std::string(cwd)  << endl;
+            return make_pair(routes::getFile(std::string(cwd) + "/bin/app/index.html"), "text/html");
         }
         else if(path == "/neutralino.js"){
             return make_pair(routes::getClientJs(), "text/javascript");

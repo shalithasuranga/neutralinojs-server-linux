@@ -13,7 +13,7 @@ void Thread::start()
     started = true;
     if(pthread_create(&pthreadId, NULL, threadFunc, _arg))
         started = false;
-    std::cout << "----------Thread created----------" << std::endl;
+    //std::cout << "----------Thread created----------" << std::endl;
 }
 
 int Thread::join()

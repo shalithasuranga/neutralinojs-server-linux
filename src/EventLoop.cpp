@@ -37,7 +37,7 @@ void EventLoop::loop()
 
     while(!isQuit)
     {
-        std::cout << "----------Looping----------" << std::endl;
+        //std::cout << "----------Looping----------" << std::endl;
         addToLoop();
         std::vector<Handler*> activeEvents;
         activeEvents.clear();
@@ -46,7 +46,7 @@ void EventLoop::loop()
         for(std::vector<Handler*>::iterator iter = activeEvents.begin();
             iter != activeEvents.end(); ++iter)
         {
-            std::cout << "----------Handle request----------" << std::endl;
+            //std::cout << "----------Handle request----------" << std::endl;
             // 处理客户端请求的入口
             (*iter)->handle();
             e->removeFd((*iter)->connFd());
@@ -65,7 +65,7 @@ void EventLoop::quit()
 void EventLoop::addToLoop(const int fd)
 {
     // e->addToEpoll(fd);
-    std::cout << "----------Add " << fd << " to loop----------" << std::endl;
+    //std::cout << "----------Add " << fd << " to loop----------" << std::endl;
     fds.push_back(fd);
 }
 
@@ -74,11 +74,11 @@ void EventLoop::addToLoop()
 {
     if(fds.empty())
     {
-        std::cout << "----------fds empty----------" << std::endl;
+        //std::cout << "----------fds empty----------" << std::endl;
         return;
     }
     for(int i = 0; i < fds.size(); ++i)
         e->addToEpoll(fds[i]);
     fds.clear();
-    std::cout << "----------Add all fd to loop----------" << std::endl;
+    //std::cout << "----------Add all fd to loop----------" << std::endl;
 }

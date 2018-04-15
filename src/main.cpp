@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
-//#include "functions.h"
+#include <string>
+#include "functions.h"
 #include "Socket.h"
 #include "EventLoop.h"
 #include "EventLoopThread.h"
@@ -11,14 +12,9 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    if(argc != 2)
-    {
-        std::cout << "Usage: " << argv[0] << " <port>" << std::endl;
-        return 0;
-    }
-    int port = std::atoi(argv[1]);
+    int port = 5000;
 
-    system("xdg-open http://localhost:5000");
+    system(("xdg-open http://localhost:" + std::to_string(port)).c_str());
  
     
     
