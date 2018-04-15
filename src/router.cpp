@@ -2,9 +2,12 @@
 #include <string>
 #include <fstream>
 #include <unistd.h>
+#include <vector>
 #include "functions.h"
+#include "core/filesystem.h"
 
 using namespace std;
+using namespace filesystem;
 
 namespace routes {
 
@@ -35,6 +38,19 @@ namespace routes {
         }
         else if(path == "/neutralino.js"){
             return make_pair(routes::getClientJs(), "text/javascript");
+        }
+        else {
+            vector<string> portions = functions::split(path, '/');
+            if(portions.size() == 3) {
+                string module = portions[1];
+                string func = portions[2];
+                //cout << module << "."<< func << endl;
+                pfunc f = filesystem::funcmap[module + "." + func];
+                string output = (*f)(""); 
+                return make_pair(output, "application/json");
+            }
+ 
+
         }
         return make_pair(path, "application/json");
     }

@@ -4,7 +4,9 @@ using namespace std;
 
 namespace filesystem {
 
-    bool createFile() {
-        
+
+
+    string createFile(string jso) {
+        return "file created";
     }
 }
