@@ -29,7 +29,7 @@ namespace routes {
         return buffer;
     }
 
-    pair<string, string> handle(string path) {
+    pair<string, string> handle(string path, string j) {
         if(path == "/"){
             char cwd[1024];
             getcwd(cwd, sizeof(cwd));
@@ -46,7 +46,7 @@ namespace routes {
                 string func = portions[2];
                 //cout << module << "."<< func << endl;
                 pfunc f = filesystem::funcmap[module + "." + func];
-                string output = (*f)(""); 
+                string output = (*f)(j); 
                 return make_pair(output, "application/json");
             }
  

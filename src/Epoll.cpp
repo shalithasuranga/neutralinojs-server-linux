@@ -49,5 +49,5 @@ void Epoll::addToEpoll(const int fd)
     event.events = EPOLLIN | EPOLLPRI | EPOLLRDHUP;
     if(epoll_ctl(epollfd, EPOLL_CTL_ADD, fd, &event) < 0)
         std::cout << "Epoll::addToEpoll error: " << strerror(errno) << std::endl;
-    std::cout << "----------Add to Epoll----------" << std::endl;
+    //std::cout << "----------Add to Epoll----------" << std::endl;
 }

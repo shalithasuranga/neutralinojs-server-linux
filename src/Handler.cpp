@@ -28,7 +28,7 @@ void Handler::handle()
         _isClosed = true;
         return;
     }
-    pair<string, string> resp = routes::handle(_request.uri);
+    pair<string, string> resp = routes::handle(_request.uri, _request.body);
     string content =  resp.first;
     std::string msg = "HTTP/1.1 200 OK\r\nContent-Type:" + resp.second + "\r\nContent-Length: " + std::to_string(content.size()) +"\r\nConnection: close\r\n\r\n" + content;
     _outputBuffer.append(msg.c_str(), msg.size());
@@ -42,9 +42,6 @@ bool Handler::receiveRequest()
     if(_inputBuffer.readFd(_connfd) == 0)
         return false;
     std::string request = _inputBuffer.readAllAsString();
-    std::cout << "---------------------------Request---------------------------" << std::endl;
-    std::cout << request << std::endl;
-    std::cout << "-------------------------------------------------------------" << std::endl;
     Parser p(request);
     _request = p.getParseResult();
     return true;

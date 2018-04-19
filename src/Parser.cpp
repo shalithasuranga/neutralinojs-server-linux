@@ -16,6 +16,7 @@ HTTPRequest Parser::getParseResult()
     parseLine();
     parseRequestLine();
     parseHeaders();
+    parseBody();
     return _parseResult;
 }
 
@@ -115,4 +116,21 @@ void Parser::parseHeaders()
             // 其他头部字段暂时忽略
         }
     }
+}
+
+
+void Parser::parseBody() {
+    bool startBody = false;
+    _parseResult.body = "";
+    for(int i = 0; i < _request.size(); i++){
+        if(i + 3 < _request.size()) {
+            if(_request[i] == '\r' && _request[i + 1] == '\n' && _request[i + 2] == '\r' && _request[i + 3] == '\n'  ){
+                startBody = true;
+            }
+        }
+        if(startBody) {
+            _parseResult.body += _request[i];
+        }
+    }
+    
 }

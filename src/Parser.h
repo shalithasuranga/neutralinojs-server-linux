@@ -21,6 +21,7 @@ typedef struct
     std::string version;    // HTTP版本
     std::string host;       // 请求的主机名
     std::string connection; // Connection首部
+    std::string body;
 } HTTPRequest;
 
 class Parser
@@ -32,6 +33,7 @@ private:
     void parseLine();        // 将请求按行解析存入_lines数组中
     void parseRequestLine(); // 解析请求行
     void parseHeaders();     // 解析头部字段
+    void parseBody(); // parser exnteded for POST body
     std::string _request;    // 客户的原始请求
     std::vector<std::string> _lines;
     HTTPRequest _parseResult;

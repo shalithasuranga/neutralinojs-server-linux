@@ -3,17 +3,14 @@
 #define FILESYSTEM_H
 
 namespace filesystem {
-    string createFile(string jso);
+    string createDirectory(string jso);
 
     typedef string (*pfunc)(string);
 
     map <string, pfunc> funcmap = {
-        {"filesystem.createFile", filesystem::createFile}
+        {"filesystem.createDirectory", filesystem::createDirectory}
     };
 
-    //void init() {
-      //  funcmap["filesystem.createFile"] = filesystem::createFile;
-    //}
 
 
 }
