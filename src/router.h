@@ -8,5 +8,7 @@ namespace routes {
 
     string getClientJs();
 
+    string getIndex();
+
     pair<string, string> handle(string path,string j);
 }

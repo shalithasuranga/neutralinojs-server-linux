@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <string>
 #include "functions.h"
+#include "settings.h"
 #include "Socket.h"
 #include "EventLoop.h"
 #include "EventLoopThread.h"
@@ -13,11 +14,14 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    int port = 5000;
+    json options = settings::getSettings();
 
-    system(("xdg-open http://localhost:" + std::to_string(port)).c_str());
- 
-    //filesystem::init();
+    int port = stoi(options["appport"].get<string>());
+    string appname = options["appname"].get<std::string>();
+
+    system(("xdg-open http://localhost:" + std::to_string(port) + "/" + appname).c_str() );
+
+    
     
     int listenFd = Socket::createSocket();
     Socket::setReuseAddr(listenFd, true);
