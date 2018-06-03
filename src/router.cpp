@@ -6,6 +6,8 @@
 #include "functions.h"
 #include "settings.h"
 #include "core/filesystem.h"
+#include "core/os.h"
+#include "core/computer.h"
 #include "../lib/json/json.hpp"
 
 using namespace std;
@@ -70,14 +72,14 @@ namespace routes {
                     pfunc f = filesystem::funcmap[module + "." + func];
                     output = (*f)(j); 
                 }
-                /*else if(os::funcmap.find(module + "." + func) != os::funcmap.end() ){
+                else if(os::funcmap.find(module + "." + func) != os::funcmap.end() ){
                     pfunc f = os::funcmap[module + "." + func];
                     output = (*f)(j); 
                 }
                 else if(computer::funcmap.find(module + "." + func) != computer::funcmap.end() ){
                     pfunc f = computer::funcmap[module + "." + func];
                     output = (*f)(j); 
-                }*/
+                }
                 else {
                     json o = {{"erorr", module + "." + func + " is not supported"}};
                     output = o.dump();
