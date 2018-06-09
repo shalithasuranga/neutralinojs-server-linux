@@ -46,7 +46,22 @@ namespace os {
     string getEnvar(string jso) {
         json input;
         json output;
-
+        try {
+            input = json::parse(jso);
+        }
+        catch(exception e){
+            output["error"] = "JSON parse error is occurred!";
+            return output.dump();
+        }
+        string i = input["name"];
+        char *o;
+        o = getenv(i.c_str());
+        if(o == NULL) {
+            output["error"] =  i + " is not defined";
+        }
+        else {
+            output["value"] = o;
+        }
         return output.dump();       
         
     }
