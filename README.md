@@ -12,8 +12,8 @@ This lightweight server runtime which will execute on Linux listen and process r
 
 Help Neutralino!.
 
-- Start this.
-- Fork and Clone this
+- Star repo
+- Fork and Clone
 - And do bug fixes or improvements and send us PR. We love it <3 
 
 ## Developer Guide
